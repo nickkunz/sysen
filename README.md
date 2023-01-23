@@ -18,5 +18,4 @@ The material in each folder contains only regular assignments (not containing mi
 
 ## Links
 - Cornell Systems Engineering PhD Course Requirements Web [<a href='https://www.systemseng.cornell.edu/se/programs/systems-phd/systems-phd-degree-requirements'>Link</a>]
-
 - Cornell Systems Engineering PhD Course Requirements PDF [<a href='https://www.systemseng.cornell.edu/sites/default/files/users/user7731/Systems%20Ph.D%20Degree%20Requirements-%20FA18%20(VD).pdf'>Link</a>]
