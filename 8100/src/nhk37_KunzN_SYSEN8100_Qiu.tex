@@ -1,0 +1,35 @@
+\documentclass[11pt]{article}
+\pagenumbering{gobble} % suppress page number
+\hyphenchar\font=-1 % suppress hyphenation
+\setlength\parindent{0pt} % suppress indentation
+
+\usepackage[margin=1truein]{geometry}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks = true,
+    linkcolor = red,
+    urlcolor = red
+}
+
+\begin{document}
+\title{SYSEN 8100-1: Systems Seminar Series\\~\\
+    \Large Feng Qiu: A Learning-Enhanced Optimization Framework for Routinely Solved Optimization Problems
+}
+\author{
+    Nick Kunz [NetID: \url{nhk37}] \hyperlink{nhk37@cornell.edu}{nhk37@cornell.edu}
+}
+\date{September 17, 2022}
+\maketitle
+
+On September 16, 2022, Dr. Feng Qiu, Principal Computational Scientist and a Section Leader at the Argonne National Laboratory, presented a summary for the work contained in two recent papers written in collaboration with he and his colleagues. The first paper was \textit{"Learning to Solve Large-Scale Security-Constrained Unit Commitment Problems"}, and the second, \textit{"Exploiting Instance and Variable Similarity to Improve Learning-Enhanced Branching"}.\\
+
+In his presentation, Dr. Qiu investigated methods for optimizing power generation in a cost effective manner, such that the generation and consumption is appropriately balanced. The main problem he addressed was the Security Constrained Unit Commitment (SCUC) - a technique utilized in power market scheduling, which was later formalized through mixed-integer programming. The novel solutions he introduced were primarily \textit{warm start learning} and \textit{branch learning}, machine learning techniques. \\
+
+Although Dr. Qiu detailed many important considerations and also demonstrated performance gains with these techniques within the energy markets domain. Perhaps one of the most interesting points he made was the ubiquity of mixed-integer programming problems. Because these problems appear in other domains outside of energy markets, he and his team developed open-source software packages, which make these techniques easier to implement and more accessible to other researchers that wish to use them. \\
+
+It was interesting to learn that these solutions were not just apart of a limited research domain or even bounded to the limits of research. These solutions were being deployed in a production setting, which was critical to the functioning operation of the power grid. Recalling that fact was important to remember throughout the presentation, as the cost of being wrong in this case, might of been higher than in an indirectly applied area of research. It begs the question of how machine learning techniques in general, might be tested for performance guarantees in broadly practical applications.
+
+\end{document}

@@ -1,0 +1,317 @@
+\documentclass{article}
+
+%% doc settings
+\hyphenchar\font=-1 % suppress hyphenation
+\setlength\parindent{0pt} % suppress indentation
+\usepackage[margin=1.25truein]{geometry} % set page margins
+
+%% libraries 
+\usepackage{array}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage{subcaption}
+
+%% link viz
+\hypersetup{
+    colorlinks = true,
+    linkcolor = red,
+    urlcolor = red,
+    citecolor = black
+}
+
+%% figs
+\usetikzlibrary{
+    shapes,
+    arrows,
+    positioning,
+    calc
+}
+
+%% page nums
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Pg. \thepage \space of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+%% begin doc
+\begin{document}
+\title{SYSEN 6000: Foundations of Complex Systems\\~\\
+    \Large Decision Making Under Uncertainty
+}
+\author{
+    Nick Kunz [NetID: \url{nhk37}] \hyperlink{nhk37@cornell.edu}{nhk37@cornell.edu}}
+\date{November 11, 2022}
+\maketitle
+\thispagestyle{fancy}
+
+%% body doc
+\section*{Two-Stage Stochastic Mixed-Integer Linear Programming}
+A company is considering to produce a product $C$, which can be manufactured with either Process II or Process III, both of which use raw material $B$. $B$ can be purchased from another company, or manufactured with Process I, which uses raw material $A$.\\
+
+Process II and Process III are exclusive (at most one of them can be built). There are five possible outcomes of demand and sale price combinations for product $C$. The probability of each scenario corresponding to the demand and sale price, as well as all supplemental data are below:\\
+
+\begin{center}
+\begin{tabular}{ | m{52pt} | m{112pt}| m{96pt} | m{80pt} |}
+    \hline
+    \space & \textbf{Demand of $C$ (M tons)} & \centering \textbf{Sale Price (\$/ton)} & \centering \textbf{Probability} & 
+    \hline
+    \textbf{Scenario 1} & \centering 5 & \centering 2,000 & \centering 0.10 & 
+    \hline
+    \textbf{Scenario 2} & \centering 8 & \centering 1,900 & \centering 0.20 &
+    \hline
+    \textbf{Scenario 3} & \centering 10 & \centering 1,800 & \centering 0.40 &
+    \hline
+    \textbf{Scenario 4} & \centering 12 & \centering 1,600 & \centering 0.20 &
+    \hline
+    \textbf{Scenario 5} & \centering 15 & \centering 1,000 & \centering 0.10 &
+    \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{ | m{52pt} | m{96pt}| m{96pt}| m{96pt}| }
+    \hline
+    \space & \centering \textbf{Fixed CapEx (\$M)} & \centering \textbf{Var CapEx (\$/ton)} & \centering \textbf{Var OpEx (\$/ton)} &
+    \hline
+    \textbf{Phase I} & \centering 100 & \centering 250 & \centering 100 &
+    \hline
+    \textbf{Phase II} & \centering 150 & \centering 400 & \centering 150 &
+    \hline
+    \textbf{Phase III} & \centering 200 & \centering 550 & \centering 200 &
+    \hline
+\end{tabular}
+\end{center}
+
+\\~\\
+The price for raw material $A$ is 250 (\$/ton) and the price for raw material $B$ is 450 (\$/ton).\\
+
+The conversion rate for Process I is 0.90 of $A$ to $B$, Process II is 0.82 of $B$ to $C$, and Process III is 0.95 of $B$ to $C$.\\
+
+The maximum supply of $A$ is 16 (M tons).
+
+\break
+Given the problem, maximizing expected profit can be formulated as:
+\begin{equation}
+\begin{split}
+    \text{max \space} 
+    & = -100x_1 - 250z_1 - 150x_2 - 400z_2 - 200x_3 - 550z_3 + \\
+    & \sum_{s} p_s((y_s_3 + y_s_4) \cdot Price_s - 100y_s_1 - 250_y_s_1 / 0.90 - 450y_s_z - 150y_s_3 - 200y_s_4)\\
+    \text{s.t.\space} 
+    & \space y_s_1 \leq z_1\\
+    & \space z_1 / 0.90 \leq 16 \cdot x_s_1\\
+    & \space y_s_1 + y_s_2 = (y_s_3 / 0.82) + (y_s_4 / 0.95)\\
+    & \space y_s_3 + y_s_4 \leq Demand_s\\
+    & \space y_s_3 \leq z_2\\
+    & \space z_2 \leq M \cdot x_2\\
+    & \space y_s_4 \leq z_3\\
+    & \space z_3 \leq M \cdot x_3\\
+    & \space x_2 + x_3 = 1
+\end{split}
+\end{equation}
+
+where the first stage decision variables are:
+\begin{equation}
+\begin{split}
+    x_1 & = \text{Process I } [0,1] \text{ with capacity } z_1\\
+    x_2 & = \text{Process II } [0,1] \text{ with capacity } z_2\\
+    x_3 & = \text{Process III } [0,1] \text{ with capacity } z_3
+\end{split}
+\end{equation}
+
+and the second stage decision variables are:
+\begin{equation}
+\begin{split}
+    y_s_1 & = B \text{ manufactured in Process I}\\
+    y_s_2 & = B \text{ purchased from another company}\\
+    y_s_3 & = C \text{ manufactured in Process II}\\
+    y_s_4 & = C \text{ manufactured in Process III}
+\end{split}
+\end{equation}
+
+that when solved, the optimal value is \textbf{\$4,931.098M}, where:
+    \begin{equation}\nonumber
+        x_1 = 0, x_2 = 1, x_3 = 0\\
+    \end{equation}
+    \begin{equation}
+        z_2 = 10\\
+    \end{equation}
+
+Considering this solution, it would be prudent to manufacture product $C$ with Process II. The corresponding capacity would be 10M tons.\\
+
+It would also be prudent to obtain the raw material $B$ by purchasing it from another company, rather than manufacturing it with Process I with raw material $A$, where product $C$ should be sold in the following amounts for each scenario:\\
+
+\begin{center}
+\begin{tabular}{ | m{52pt} | m{92pt}| }
+    \hline
+    \textbf{} & \textbf{Sale of $C$ (M tons)} & 
+    \hline
+    \textbf{Scenario 1} & \centering 5 & 
+    \hline
+    \textbf{Scenario 2} & \centering 8 & 
+    \hline
+    \textbf{Scenario 3} & \centering 10 & 
+    \hline
+    \textbf{Scenario 4} & \centering 10 & 
+    \hline
+    \textbf{Scenario 5} & \centering 10 & 
+    \hline
+\end{tabular}
+\end{center}
+
+\break
+In this case, the \textit{``value of perfect information''} can be reformulated as:
+\begin{equation}
+\begin{split}
+    \text{max \space} 
+    = & \sum_{s} p_s (-100x_s_1 - 250z_s_1 - 150x_s_2 - 400z_s_2 - 200x_s_3 - 550z_s_3) + \\
+    & \sum_{s} p_s ((y_s_3 + y_s_4) \cdot Price_s - 100y_s_1 - (250_y_s_1 / 0.90) - 450y_s_z - 150y_s_3 - 200y_s_4)\\
+    \text{s.t. \space} 
+    & \space y_s_1 \leq z_s_1\\
+    & \space z_s_1 / 0.90 \leq 16 \cdot x_s_1\\
+    & \space y_s_1 + y_s_2 = (y_s_3 / 0.82) + (y_s_4 / 0.95)\\
+    & \space y_s_3 + y_s_4 \leq Demand_s\\
+    & \space y_s_3 \leq z_s_2\\
+    & \space z_s_2 \leq M \cdot x_s_2\\
+    & \space y_s_4 \leq z_s_3\\
+    & \space z_s_3 \leq M \cdot x_s_3\\
+    & \space x_s_2 + x_s_3 = 1
+\end{split}
+\end{equation}
+
+where there are no first stage decision variables, and the second stage decision variables are:
+\begin{equation}
+\begin{split}
+    x_s_1 & = \text{Process I } [0,1] \text{ with capacity } z_s_1\\
+    x_s_2 & = \text{Process II } [0,1] \text{ with capacity } z_s_2\\
+    x_s_3 & = \text{Process III } [0,1] \text{ with capacity } z_s_3\\
+    y_s_1 & = B \text{ manufactured in Process I}\\
+    y_s_2 & = B \text{ purchased from another company}\\
+    y_s_3 & = C \text{ manufactured in Process II}\\
+    y_s_4 & = C \text{ manufactured in Process III}
+\end{split}
+\end{equation}
+
+that when solved, the optimal value is \$5,590.366M, so that:
+\begin{equation}
+    \$5,590.366 \text{M} - \$4,931.098 \text{M} = \$659.268\text{M}
+\end{equation}
+
+Hence, the \textit{``value of perfect information''} is \textbf{\$659.268M}.\\
+\\~\\
+
+\section*{Robust Two-Stage Stochastic Linear Programming}
+
+The following is a derivation of the robust counterpart, given that:
+\begin{equation}
+\begin{split}
+    \text{max \space} 
+    & 10x_1 + 5x_2\\
+    \text{s.t.\space}
+    & \space (6 + u_1) x_1 + (2 + u_2) x_2 \leq 80, \, \forall (u_1, u_2) \in U
+\end{split}
+\end{equation}\\
+
+where $U$ is the box uncertainty set:
+\begin{equation}
+    U = \{(u_1, u_2): |u_1| \leq 1, |u_2| \leq 1\}
+\end{equation}
+
+\break
+which can begin with the expression:
+\begin{equation}
+\begin{split}
+    \text{max \space} 
+    & 10x_1 + 5x_2\\
+    \text{s.t.\space}
+    & \space 6x_1 + 2x_2 + \sqrt{(x_1)^2 + (x_2)^2} \leq 80
+\end{split}
+\end{equation}\\
+
+and the box uncertainty set $U$, which can be expressed as a general polyhedral set:
+\begin{equation}
+    U = 
+    \left\{ 
+    (u_1, u_2) \Bigg|
+        \begin{array}{lr}
+            & u_1 \leq 1\\
+            & u_2 \leq 1\\
+            & -u_1 \leq 1\\
+            & -u_2 \leq 1\\
+        \end{array}
+    \right\} = \{ (u_1, u_2) | \textbf{Wu} \leq \textbf{v} \}
+\end{equation}
+
+where:
+\begin{equation}
+    \textbf{W} = 
+    \begin{bmatrix}
+        1 & 0 & -1 & 0\\
+        0 & 1 & 0 & -1
+    \end{bmatrix}^T, \, \textbf{v} =  
+    \begin{bmatrix}
+        1 & 1 & 1 & 1
+    \end{bmatrix}^T
+\end{equation}
+
+such that:
+\begin{equation}
+    \textbf{P} = \begin{bmatrix}
+        1 & 0\\
+        0 & 1
+    \end{bmatrix}, \, \textbf{p} =  
+    \begin{bmatrix}
+        6\\
+        2
+    \end{bmatrix}, \, \textbf{q} = 
+    \begin{bmatrix}
+        0\\
+        0
+    \end{bmatrix}, \, r = 80
+\end{equation}\\
+
+This allows for the constraint $(6 + u_1) x_1 + (2 + u_2) x_2 \leq 80, \, \forall (u_1, u_2) \in U$ to be reformulated as:
+\begin{equation}
+\begin{split}
+    & \lambda_1 + \lambda_2 + \lambda_3 + \lambda_4 \leq -6x_1 - 2x_2 + 80\\
+    & \lambda_1 - \lambda_3 = x_1\\
+    & \lambda_2 - \lambda_4 = x_2\\
+    & \lambda_1, \lambda_2, \lambda_3, \lambda_4 \geq 0
+\end{split} 
+\end{equation}
+
+such that $\lambda_1,\ldots, \lambda_4$ are dual variables corresponding to $\textbf{Wu} \leq \textbf{v}$.\\
+
+\\~\\
+Hence, the robust counterpart can be expressed as:
+\begin{equation}
+\begin{split}
+    \text{max \space} 
+    & 10x_1 + 5x_2\\
+    \text{s.t. \space} 
+    & \lambda_1 + \lambda_2 + \lambda_3 + \lambda_4 \leq -6x_1 - 2x_2 + 80\\
+    & \lambda_1 - \lambda_3 = x_1\\
+    & \lambda_2 - \lambda_4 = x_2\\
+    & \lambda_1, \lambda_2, \lambda_3, \lambda_4 \geq 0
+\end{split}
+\end{equation}
+
+% That when solved, the optimal value is $\cdot$, where:
+% \begin{equation}\nonumber
+%     \lambda_1  = \cdot, \lambda_2 = \cdot, \lambda_3 = \cdot, \lambda_4 = \cdot
+% \end{equation}
+% \begin{equation}
+%     x_1 = , x_2 = 
+% \end{equation}
+
+\end{document}
