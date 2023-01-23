@@ -1,0 +1,66 @@
+\documentclass{article}
+
+%% doc settings
+\hyphenchar\font=-1 % suppress hyphenation
+\setlength\parindent{0pt} % suppress indentation
+\usepackage[margin=1.5truein]{geometry} % set page margins
+
+%% core libraries
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{tikz}
+
+%% sec libraries
+\usetikzlibrary{shapes,arrows}
+\usepackage{textcomp}
+
+%% link viz
+\hypersetup{
+    colorlinks = true,
+    linkcolor = red,
+    urlcolor = red,
+    citecolor = black
+}
+
+%% page nums
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Pg. \thepage \space of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+%% begin doc
+\begin{document}
+\title{SYSEN 6150: Model Based Systems Engineering\\~\\
+    \Large User Story (Revised)
+}
+\author{
+    Nick Kunz [NetID: \url{nhk37}] \hyperlink{nhk37@cornell.edu}{nhk37@cornell.edu}}
+\date{September 23, 2022 (Revised Janurary, 22, 2023)}
+\maketitle
+\thispagestyle{fancy}
+
+\section*{User Story: }
+\begin{enumerate}
+    \item \textbf{Card}: \\~\\
+        The users of the transit information and prediction system shall be able to retrieve real-time alerts on green house gas (GHG) emissions from bus idling during all operational hours. The system shall have a latency of no longer than 5 secs from the time each vehicle collects data to the time it is available for viewing from a mobile device. The data generated from the system shall be publicly available on a daily basis.
+    \item \textbf{Conversation}:
+    \begin{enumerate}
+        \item Users would like to be able to avoid exposure prolonged exposure to GHG emissions from buses that are stopped at bus stops.
+        \item Users require that the information they receive should be fast enough to make near immediate decisions by notifications from their mobile device.
+        \item Public health authorities have expressed interest in acquiring this data to inform future policy regarding transportation and respiratory disease.
+    \end{enumerate}
+    \item \textbf{Confirmation}:
+    \begin{enumerate}
+        \item The transit information and prediction system successfully detected idling buses
+        \item The system has handled the incoming request load and stress test of users at all hours of operation.
+        \item The wall-clock time from data collection on vehicles to notifications on mobile devices has averaged less than 2 seconds.
+        \item A persistent and robust storage system of all historical data is open-source and publicly available and updated on a daily basis for download. 
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}

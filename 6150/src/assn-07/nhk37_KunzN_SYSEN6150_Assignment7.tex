@@ -1,0 +1,94 @@
+\documentclass{article}
+
+%% doc settings
+\setlength\parindent{0pt} % suppress indentation
+\usepackage[margin=1.5truein]{geometry} % set page margins
+\usepackage[none]{hyphenat} % suppress hyphenation
+
+%% libraries
+\usepackage{array}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{tikz}
+\usepackage{textcomp}
+
+%% link viz
+\hypersetup{
+    colorlinks = true,
+    linkcolor = red,
+    urlcolor = red,
+    citecolor = black
+}
+
+%% figs
+\usetikzlibrary{
+    shapes,
+    arrows,
+    positioning,
+    calc
+}
+
+\tikzset{
+    block/.style = {draw, fill=white, rectangle, minimum height=3em, minimum width=3em},
+    round/.style = {draw, fill=white, circle},
+    tmp/.style  = {coordinate}, 
+    sum/.style= {draw, fill=white, circle, node distance=1cm},
+    input/.style = {coordinate},
+    output/.style= {coordinate},
+    pinstyle/.style = {pin edge={to-,thin,black}
+    }
+}
+
+%% page numbers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Pg. \thepage \space of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+%% begin doc
+\begin{document}
+\title{SYSEN 6150: Model Based Systems Engineering\\~\\
+    \Large Subsystem Matrix \& Interface Diagram
+}
+\author{
+    Nick Kunz [NetID: \url{nhk37}] \hyperlink{nhk37@cornell.edu}{nhk37@cornell.edu}
+}
+\date{October 28, 2022}
+\maketitle
+\thispagestyle{fancy}
+
+%% body
+\\~\\
+\section*{Subsystem Matrix}
+The following is an example of a subsystem matrix for the transit prediction system as the System of Interest (SOI).\\
+
+\begin{tabular}{ | m{70pt} | m{70pt}| m{70pt} | m{70pt} | m{70pt} | }    
+    \hline
+    \textbf{\centering{Data Collection System}} & \textbf{Data Parser and Mapping System} & \textbf{Data Storage System} & \textbf{Analytics and Modeling System} & \textbf{Geographic Information System}\\ 
+    \hline
+    The system shall authenticate with API end point and key. & The system shall conduct identification and object mapping & The system shall conduct data persistence \& storage. & The system shall automate analyses and interpretability. & The system shall conduct spatio-temporal analyses.\\ 
+    \hline
+    The system shall send get requests for data retrieval. & The system shall filter for id inconsistencies & The system shall storge service logging. & The system shall conduct model training \& validation when required. & The system shall conduct geoprocessing when required.\\
+    \hline
+    The system shall handle unresponsive and stale requests. & The system shall conduct data transformations. & The system shall be able to query data. & The system shall detect outliers. & The system shall geographically visualize GIS data.\\
+    \hline
+\end{tabular}
+\\~\\
+\newpage
+\section*{Interface Diagrams}
+The SOI often has several important subsystems, such as those previously mentioned in the Subsystem Matrix above. The layers between those subsystems are equally important, as they bind them to their respective interfaces. The interfaces between  subsystems are critical to the proper functioning of the broader SOI, where the goal is to design interfaces between subsystems, such that all components appropriately integrate with each other and that the broader SOI functions as intended.\\
+
+In the case where the Interface Diagrams are applied to the given transit prediction system as the SOI, the Interface Diagrams are perhaps the most obviously useful in the \textit{Data Collection System}. The \textit{Data Collection System} necessarily requires a connection to the source Application Programming Interface (API). Furthermore, it needs to send and receive data through the same interface, as well as appropriately handle events where those requests for data are unsuccessful.\\
+
+Another application of the Interface Diagram is the layer between the \textit{Data Parser and Mapping System} and the \textit{Data Storage System}. Assuming the data from the API has been successfully retrieved and processed, the SOI requires that the data be persisted. In this context, the \textit{Data Parser and Mapping System} needs to write to a given database, which occurs at the interface of the \textit{Data Storage System}. Furthermore, that all other interface events be logged and stored in the \textit{Data Storage System}.\\
+
+In the two previously mentioned examples, the interfaces generally only require integration between two other subsystems (with the main exception of logging). However, there is such a case where a subsystem requires an interface between four other subsystems. The \textit{Analytics and Modeling System} interfaces directly with all other subsystems other than the \textit{Data Collection System}. It is important to highlight here that this single subsystem requires four distinct sets of interfaces. \\
+
+Interfaces and the subsystems they connect are important considerations when designing any SOI. The proper functioning of each subsystem and the broader SOI relies on them, which is why Interface Diagrams are important when designing such a system. Interface Diagrams aid in outlining the relationships and requirements between subsystems. They can also help to describe other systems beyond those described within the SOI and their respective interface requirements. 
+
+\end{document}

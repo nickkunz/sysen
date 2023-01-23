@@ -1,0 +1,98 @@
+\documentclass{article}
+
+%% doc settings
+\hyphenchar\font=-1 % suppress hyphenation
+\setlength\parindent{0pt} % suppress indentation
+\usepackage[margin=1.5truein]{geometry} % set page margins
+
+%% libraries
+\usepackage{array}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{tikz}
+\usepackage{textcomp}
+
+%% link appearance 
+\hypersetup{
+    colorlinks = true,
+    linkcolor = red,
+    urlcolor = red,
+    citecolor = black
+}
+
+%% table & diagrams
+\usetikzlibrary{
+    shapes,
+    arrows,
+    positioning,
+    calc
+}
+
+\tikzset{
+    block/.style = {draw, fill=white, rectangle, minimum height=48pt, minimum width=64pt},
+    round/.style = {draw, fill=white, circle},
+    sum/.style= {draw, fill=white, circle, node distance=2cm},
+    input/.style = {coordinate},
+    output/.style= {coordinate},
+}
+
+%% page numbers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Pg. \thepage \space of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+%% begin doc
+\begin{document}
+\title{SYSEN 6150: Model Based Systems Engineering\\~\\
+    \Large Quality Functional Deployment
+}
+\author{
+    Nick Kunz [NetID: \url{nhk37}] \hyperlink{nhk37@cornell.edu}{nhk37@cornell.edu}
+}
+\date{October 23, 2022}
+\maketitle
+\thispagestyle{fancy}
+
+%% body
+\section*{Quality Functional Deployment (QFD)}
+
+The Quality Functional Deployment (QFD), also referred to as the \textit{``House of Quality''} is a customer/user satisfaction technique for a given product or service. There are a number of QFD methods. However, this particular method is known in practice as the \textit{``Shed of Quality''}.\\
+
+In this context, the 6 components outlined in the QFD are as follows. The details outlined in the QFD are related to a general framework for a transit prediction system, which might likely assume the following characteristics. It is important to consider that many of these characteristics are also found in performance criteria such as the GQM, AHP, etc.:
+\begin{enumerate}
+    \item \textbf{Customer Objectives}
+    
+    The system needs to be fast, reliable, persistent, informative, and allow for input, responses, and feedback from end-users. It also requires that the system interface be publicly accessible and the transit data openly available for analysts.
+    
+    \item \textbf{Customer Perceptions}
+    
+    The system needs to inform users such that the predictions are generally consistent with visceral experiences. More specifically, it requires that they are low-latency and accurate. The trust and reliability of the available data is also important.
+    
+    \item \textbf{Engineering Characteristics}
+
+    The system requires data collection \& parsing, persistent storage, analyses \& modeling, application services, testing \& logging, development operations \& deployment support, interface management, technical documentation, and cost management.
+    
+    \item \textbf{Impact of Engineering Characteristics on Customer Objectives}
+
+    The impact of engineering characteristics on customer objectives are determined by the intersecting relationships between customer objectives and engineering characteristics. For example, how open data relates to interface management.
+
+\newpage
+    \item \textbf{Inter-relationships}
+
+    The inter-relationships largely address the relationships between the different engineering characteristics. For example, the relationship between application services, and testing \& logging. Another example might be the relationship between persistent storage, and data collection \& parsing.
+    
+    \item \textbf{Targets}
+
+    The targets of the system are characterized by the performance criteria of the previously mentioned engineering characteristics. These also include metrics, which can be difficult to measure, such as technical documentation, and interface management.
+    
+\end{enumerate}
+
+It is important to highlight that although the 6 components outlined in the \textit{``Shed of Quality''} QFD are useful as a stand alone ``snapshot'' of the system, it is often the case that linking them at various stages throughout the project is even more useful for designing a system then when taken at a single moment. 
+
+\end{document}
