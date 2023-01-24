@@ -1,0 +1,214 @@
+\documentclass{article}
+
+%% doc settings
+\setlength\parindent{0pt} % suppress indentation
+\usepackage[margin=1.5truein]{geometry} % set page margins
+\usepackage[none]{hyphenat} % suppress hyphenation
+
+%% libraries
+\usepackage{array}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{tikz}
+\usepackage{textcomp}
+
+%% link viz
+\hypersetup{
+    colorlinks = true,
+    linkcolor = red,
+    urlcolor = red,
+    citecolor = black
+}
+
+%% figs
+\usetikzlibrary{
+    shapes,
+    arrows,
+    positioning,
+    calc
+}
+
+\tikzset{
+    block/.style = {draw, fill=white, rectangle, minimum height=3em, minimum width=3em},
+    round/.style = {draw, fill=white, circle},
+    tmp/.style  = {coordinate}, 
+    sum/.style= {draw, fill=white, circle, node distance=1cm},
+    input/.style = {coordinate},
+    output/.style= {coordinate},
+    pinstyle/.style = {pin edge={to-,thin,black}
+    }
+}
+
+%% page numbers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Pg. \thepage \space of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+%% begin doc
+\begin{document}
+\title{SYSEN 6150: Model Based Systems Engineering\\~\\
+    \Large Operational Description Template \& \\
+    Derived Requirements
+}
+\author{
+    Nick Kunz [NetID: \url{nhk37}] \hyperlink{nhk37@cornell.edu}{nhk37@cornell.edu}
+}
+\date{November 2, 2022}
+\maketitle
+\thispagestyle{fancy}
+
+%% body
+\section*{Operational Description Template}
+The following diagram exhibits the original scenario in the Use Case Behavioral Diagram (UCBD), when a new user begins to use the System of Interest (SOI).\\
+
+\textbf{Use Case Behavioral Diagram (UCBD)}\\
+
+\begin{tabular}{ | m{128pt} | m{128pt}| m{128pt} | }
+    \hline
+    \multicolumn{3}{|l|}{Prediction System} \\
+    \hline
+    \multicolumn{3}{|l|}{\textbf{Initial Conditions}} \\
+    \hline
+    \multicolumn{3}{|l|}{1. The system is in a state on stand by for request.} \\
+    \hline
+    \textbf{User} & \textbf{System} & \textbf{Outcome} \\ 
+    \hline
+    The user requests prediction on wait time. & \space & \space \\ 
+    \hline
+    \space & The system shall respond with estimated wait time. & \space \\
+    \hline
+    The user rejects predicted wait time. & \space & \space \\ 
+    \hline
+    \space & The system shall respond with explanation for wait time. & \space \\ 
+    \hline
+    \space & The system shall offer new prediction. & \space \\ 
+    \hline
+    \space & \space & No direct action is taken by the user. \\ 
+    \hline
+    \multicolumn{3}{|l|}{\textbf{Ending Conditions}} \\
+    \hline
+    \multicolumn{3}{|l|}{1. The system is in a state to input user preference for max wait time.} \\
+    \hline
+    \multicolumn{3}{|l|}{\textbf{Notes}} \\
+    \hline
+    \multicolumn{3}{|l|}{1. This assumes a new user to the system.} \\
+    \hline
+\end{tabular}\\
+
+\newpage
+The following diagram exhibits the original Subsystem Matrix for the SOI.\\
+
+\textbf{Subsystem Matrix}\\
+
+\begin{tabular}{ | m{70pt} | m{70pt}| m{70pt} | m{70pt} | m{70pt} | }    
+    \hline
+    \textbf{\centering{Data Collection System}} & \textbf{Data Parser and Mapping System} & \textbf{Data Storage System} & \textbf{Analytics and Modeling System} & \textbf{Geographic Information System}\\ 
+    \hline
+    The system shall authenticate with API end point and key. & The system shall conduct identification and object mapping & The system shall conduct data persistence \& storage. & The system shall automate analyses and interpretability. & The system shall conduct spatio-temporal analyses.\\ 
+    \hline
+    The system shall send get requests for data retrieval. & The system shall filter for id inconsistencies & The system shall storge service logging. & The system shall conduct model training \& validation when required. & The system shall conduct geoprocessing when required.\\
+    \hline
+    The system shall handle unresponsive and stale requests. & The system shall conduct data transformations. & The system shall be able to query data. & The system shall detect outliers. & The system shall geographically visualize GIS data.\\
+    \hline
+\end{tabular}\\
+
+\\~\\
+The following is an example of an Operational Description Template (ODT), where the UCBD is further broken down into different subsystems, as exhibited in the Subsystem Matrix. In other words, the ODT combines the UCBD with the Subsystem Matrix.\\
+
+\textbf{Operational Description Template (ODT)}\\
+
+\begin{tabular}{ | m{46pt} | m{46pt} | m{46pt}| m{46pt} | m{46pt} | m{46pt} | m{46pt} |}    
+    \hline
+    \textbf{\centering{User}} & \textbf{\centering{Data Collection System}} & \textbf{Data Parser Mapping System} & \textbf{Data Storage System} & \textbf{Analytics and Modeling System} & \textbf{Geo. Info. System} & \textbf{\centering{Outcome}}\\ 
+    \hline
+    The user requests prediction on wait time. & & & & & & \\ 
+    \hline
+    & The system shall auth. with API end point and key. & & & & &\\
+    \hline
+    % & The system shall send get requests for data retrieval. & & & & &\\
+    % \hline
+    % & & The system shall conduct id. and object mapping. & & & &\\
+    % \hline
+    % & & The system shall conduct data transform. & & & &\\
+    % \hline
+    % & & & The system shall conduct data persistence. & & &\\
+    % \hline
+\end{tabular}\\
+
+\begin{tabular}{ | m{46pt} | m{46pt} | m{46pt}| m{46pt} | m{46pt} | m{46pt} | m{46pt} |}    
+    \hline
+    \textbf{\centering{User}} & \textbf{\centering{Data Collection System}} & \textbf{Data Parser Mapping System} & \textbf{Data Storage System} & \textbf{Analytics and Modeling System} & \textbf{Geo. Info. System} & \textbf{\centering{Outcome}}\\ 
+    % \hline
+    % The user requests prediction on wait time. & & & & & & \\ 
+    % \hline
+    % & The system shall auth. with API end point and key. & & & & &\\
+    \hline
+    & The system shall send get requests for data retrieval. & & & & &\\
+    \hline
+    & & The system shall conduct id. and object mapping. & & & &\\
+    \hline
+    & & The system shall conduct data transform. & & & &\\
+    \hline
+    & & & The system shall conduct data persistence. & & &\\
+    \hline
+    & & & The system shall storge service logging. & & &\\
+    \hline
+    & & & & The system shall automate analyses and interpret. & &\\
+    \hline
+    & & & & & & No direct action is taken by the user. \\
+    \hline
+\end{tabular}\\
+
+\newpage
+\section*{Derived Requirements}
+The following diagram exhibits a truncated version of the original system requirements.
+
+\\~\\
+\begin{tabular}{ | m{28pt} | m{232pt}| m{124pt} | }
+    \hline
+    \textbf{Index} & \textbf{Originating Requirements} & \textbf{Abstract Function Name} \\ 
+    \hline
+    \textbf{OR.1} & The system shall not store user PII. &  PII \\ 
+    \hline
+    \textbf{OR.2} & The system shall input user max wait time. & Max Time \\ 
+    \hline
+    \textbf{OR.3} & The system shall respond within 3 sec. of request. & Response Time \\ 
+    \hline
+    \textbf{OR.4} & The system shall not share other user info. & Shared Data \\ 
+    \hline
+    \textbf{OR.5} & The system shall input local time-zone. & Local Time \\ 
+    \hline
+    \textbf{OR.6} & The system shall not repeat predictions. & Repeat \\ 
+    \hline
+    \textbf{OR.7} & The system shall provide one sentence explanations. & Explain \\ 
+    \hline
+    \textbf{OR.8} & The system shall provide one prediction per request. & Sequence \\ 
+    \hline
+    \textbf{OR.9} & The system shall terminate at user command. & Terminate \\ 
+    \hline
+    \textbf{OR.10} & The system shall be accessible offline. & Offline \\ 
+    \hline
+\end{tabular}
+\\~\\
+
+The following diagram exhibits the derived requirements based on the \textbf{OR.X} index above.\\
+
+\begin{tabular}{ | m{28pt} | m{232pt}| m{56pt} | m{56pt} |}
+    \hline
+    \textbf{Index} & \textbf{Originating Requirements} & \textbf{AF Name} & \textbf{Source OR}\\ 
+    \hline
+    \textbf{DR.1} & The system shall use device settings for time-zone. &  Device Time  & OR.5\\ 
+    \hline
+    \textbf{DR.2} & The system shall support all languages on device. &  Language  & OR.7\\ 
+    \hline
+    \textbf{DR.3} & The system shall have time-out parameters. &  Standby  & OR.9\\ 
+    \hline
+\end{tabular}
+
+\end{document}
