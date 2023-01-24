@@ -8,9 +8,9 @@ All documents are implemented in LaTeX. The PDF's can be complied from the sourc
 The material in each folder contains only regular assignments (not containing midterm or final projects) corresponding to the following, where all instructor annotations have been omitted.
 
 ## Coursework
-- SYSEN 6150: Model Based Systems Engineering [<a href="https://classes.cornell.edu/browse/roster/FA22/class/SYSEN/6150">Link</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/6150/src'>LaTeX</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/6150/pdf'>PDF</a>]
-- SYSEN 6000: Foundations of Complex Systems [<a href="https://classes.cornell.edu/browse/roster/FA22/class/SYSEN/6000">Link</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/6000/src'>LaTeX</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/6000/pdf'>PDF</a>]
-- SYSEN 8100: Systems Seminar Series [<a href="https://classes.cornell.edu/browse/roster/FA22/class/SYSEN/8100">Link</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/8100/src'>LaTeX</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/8100/pdf'>PDF</a>]
+- SYSEN 6150: Model Based Systems Engineering, Fall 2022 [<a href="https://classes.cornell.edu/browse/roster/FA22/class/SYSEN/6150">Link</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/6150/src'>LaTeX</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/6150/pdf'>PDF</a>]
+- SYSEN 6000: Foundations of Complex Systems, Fall 2022  [<a href="https://classes.cornell.edu/browse/roster/FA22/class/SYSEN/6000">Link</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/6000/src'>LaTeX</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/6000/pdf'>PDF</a>]
+- SYSEN 8100: Systems Seminar Series, Fall 2022  [<a href="https://classes.cornell.edu/browse/roster/FA22/class/SYSEN/8100">Link</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/8100/src'>LaTeX</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/8100/pdf'>PDF</a>]
 - SYSEN 5200: Systems Analysis Behavior and Optimization, Spring 2023 [<a href="https://classes.cornell.edu/browse/roster/SP23/class/SYSEN/5200">Link</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/5200/src'>LaTeX</a>] [<a href='https://github.com/nickkunz/sysen/tree/main/5200/pdf'>PDF</a>]
 
 ## Requirements
