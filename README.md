@@ -3,7 +3,7 @@
 ## Description
 This repo contains the Systems Engineering coursework content completed in partial fulfillment for the requirements of the PhD in Systems Engineering at Cornell University.
 
-All documents are implemented in LaTeX. The PDF's can be complied from the source through the path ``../src/`` or accessed directly through the path ``../pdf/`` for each folder: ``6150/``, ``6000/``, ``8100/``. 
+All documents are implemented in LaTeX. The PDF's can be complied from the source through the path ``../src/`` or accessed directly through the path ``../pdf/`` for each folder: ``6150/``, ``6000/``, ``8100/``, ``5200/``. 
 
 The material in each folder contains only regular assignments (not containing midterm or final projects) corresponding to the following, where all instructor annotations have been omitted.
 

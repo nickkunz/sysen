@@ -1,0 +1,268 @@
+\documentclass{article}
+
+%% doc settings
+\hyphenchar\font=-1 % suppress hyphenation
+\setlength\parindent{0pt} % suppress indentation
+\usepackage[margin=1.25truein]{geometry} % set page margins
+
+%% libraries 
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algcompatible}
+\usepackage{natbib}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage{subcaption}
+\usetikzlibrary{shapes, arrows}
+
+%% link viz
+\hypersetup{
+    colorlinks = true,
+    linkcolor = red,
+    urlcolor = red,
+    citecolor = black
+}
+
+%% code colors 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%% math ops
+\DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
+
+%% page nums
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Pg. \thepage \space of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+%% begin doc
+\begin{document}
+\title{SYSEN 5200: Systems Analysis Behavior and Optimization\\~\\
+    \Large Probability \& Statistics: Random Variables
+}
+\author{
+    Nick Kunz [NetID: \url{nhk37}] \hyperlink{nhk37@cornell.edu}{nhk37@cornell.edu}}
+\date{Feburary 5, 2023}
+\maketitle
+\thispagestyle{fancy}
+
+%% body doc
+\begin{enumerate}
+
+    \item Suppose $X$ is a continuous r.v. with the following p.d.f.
+    
+    \begin{equation}\nonumber
+    f(x) = \begin{cases}
+        cx^{-5} & \text{for } 2 \leq x < \infty\\
+        0 & \text{for } x < 2
+        \end{cases}
+    \end{equation}\\
+
+    \begin{enumerate}
+        \item The constant $c$ can be computed as:
+        
+        \begin{equation}
+            \begin{split}
+                \int_{-\infty}^{\infty} f(x) \,dx &= \int_{2}^{\infty} cx^{-5} \,dx = 1\\
+                &= cx^{-5} \bigg|_{2}^{\infty}\\
+                &= \frac{c}{64} \Rightarrow c = 64
+            \end{split}
+        \end{equation}
+        
+        \item The c.d.f. can be computed as:
+        
+        \begin{equation}
+            \begin{split}
+                F(x) &= \int_{-\infty}^{x} f(y) \,dy\\
+                &= \int_{2}^{x} 64y^{-5} \,dy\\
+                &= 64y^{-5} \bigg|_{2}^{x}\\
+                &= 64[-1/4y^{4}] \bigg|_{2}^{x}\\
+                &= \begin{cases}
+                    1 - (16/x^4) & \text{ for } x \geq 2\\
+                    0 & \text{ for } x < 2
+                \end{cases}
+            \end{split}
+        \end{equation}
+
+\newpage
+        \item The $\mathbb{E}{[X]}$ and $Var(X)$ can be computed as:
+        
+        \begin{equation}
+            \begin{split}
+            \mathbb{E}{[X]} & = \int_{-\infty}^{\infty}x \,f(x) \, dx \\
+            &= \int_{2}^{\infty} x \, (64x^{-5}) \, dx \\
+            &= \frac{8}{3}\\~\\
+            \mathbb{E}{[X^{2}]} & = \int_{-\infty}^{\infty}x^{2} \,f(x) \, dx \\
+            &= \int_{2}^{\infty} x^{2} \, (64x^{-5}) \, dx \\
+            &= 8\\~\\
+            Var(X) &= \mathbb{E}{[X^2]} - (\mathbb{E}{[X])^2}\\
+            &= 8 - (8/3)^2\\
+            &= \frac{8}{9}
+            \end{split}
+        \end{equation}
+        
+        \item The $\mathbb{E}{[X^4]}$ can be computed as:
+        \begin{equation}
+            \begin{split}
+            \mathbb{E}{[X^{4}]} & = \int_{-\infty}^{\infty}x^{4} \,f(x) \, dx \\
+            &= \int_{2}^{\infty} x^{4} \, (64x^{-5}) \, dx \\
+            &= \infty
+            \end{split}
+        \end{equation}
+    \end{enumerate}
+
+    \item Suppose that $X$ is a continuous uniform r.v. with p.d.f. $U[10, 17]$. $P(X \geq 15)$ can be computed by evaluating all integrals with the c.d.f.:
+
+    \begin{equation}
+        F(x) = \begin{cases}
+        0 & \text{for } x < a\\
+        \frac{x -a }{b - a} & \text{for } a \leq x \leq b\\
+        1 & \text{for } x > b
+        \end{cases}
+    \end{equation}
+
+    where:
+    \begin{equation}
+        U[a,b]
+    \end{equation}\\
+
+    Hence:
+    \begin{equation}
+        \begin{split}
+            P(X \geq 15) &= 1 - F(x)\\
+            &= 1 - (5/7)\\
+            &= \frac{2}{7}
+        \end{split}
+    \end{equation}
+    
+    where:
+    \begin{equation}
+        F(15) = \frac{15-10}{17-10} = \frac{5}{7}
+    \end{equation}
+
+    \item Suppose that $X$ is a continuous r.v. with p.d.f. $Expo(\lambda)$, and $a$ is some positive number such that $a < \frac{\lambda}{2}$. $Var(e^{aX})$ can be computed by evaluating all integrals.\\
+
+    Given the p.d.f. of the exponential r.v. $X$:
+    
+    \begin{equation}
+        \begin{split}
+            f(x) = \begin{cases}
+            \lambda e^{-\lambda x} & x > 0\\
+            0 & \text{otherwise}
+            \end{cases}
+        \end{split}
+    \end{equation}\\
+
+    The $Var(e^{aX})$ can be computed as:
+    
+    \begin{equation}
+        \begin{split}
+        \mathbb{E}{[e^{aX}]} & = \int_{-\infty}^{\infty}x \,f(x) \, dx \\
+        &= \int_{0}^{\infty} e^{aX} \, \lambda e^{-\lambda x} \, dx \\
+        &= \lambda \bigg[\frac{e^{-(\lambda-a)x}}{-(\lambda-a)} \bigg]_{0}^{\infty}\\
+        &= \frac{\lambda}{(\lambda-a)}\\~\\
+        \mathbb{E}{[e^{2aX}]} & = \int_{-\infty}^{\infty}x^{2} \,f(x) \, dx \\
+        &= \int_{0}^{\infty} e^{2aX} \, \lambda e^{-\lambda x} \, dx \\
+        &= \lambda \bigg[\frac{e^{-(\lambda-2a)x}}{-(\lambda-2a)} \bigg]_{0}^{\infty}\\
+        &= \frac{\lambda}{(\lambda-2a)}\\~\\
+        Var(e^{aX}) &= \mathbb{E}{[e^{2aX}]} - (\mathbb{E}{[e^{aX}])^2}\\
+        &= (\lambda / \lambda - 2a) - (\lambda/(\lambda-a))^{2}\\
+        &= \frac{\lambda}{(\lambda-2a)} - {\frac{\lambda^{2}}{(\lambda-a)^{2}}}
+        \end{split}
+    \end{equation}\\~\\
+
+    \item Let $X$ and $Y$ be Bernoulli r.v.'s with $P(X = 1 \text{ and } Y = 1) = 1/3$ with the probability of success $p$ and $q$ respectively, such that:\\
+
+    \begin{equation}\nonumber
+    X = \begin{cases}
+        1 & \text{with probability } p\\
+        0 & \text{with probability } 1-p
+        \end{cases},\\~\\
+    Y = \begin{cases}
+        1 & \text{with probability } q\\
+        0 & \text{with probability } 1-q
+        \end{cases}
+    \end{equation}\\
+
+    \begin{enumerate}
+        \item The $Cov(X, Y)$ can be computed as:
+
+        \begin{equation}
+            \begin{split}
+                Cov(X,Y) &= \mathbb{E}{\big[(X-\mathbb{E}{[X]}) - (Y-\mathbb{E}{[Y]})\big]}\\
+                &= \mathbb{E}{[XY]} - \mathbb{E}{[X]}\mathbb{E}{[Y]}\\
+                &= \frac{1}{3} - p \cdot q
+            \end{split}
+        \end{equation}
+
+        where:
+        \begin{equation}
+            \begin{split}
+                \mathbb{E}{[X]} &= p\\
+                \mathbb{E}{[Y]} &= q\\~\\
+                \mathbb{E}{[XY]} &= P(X = 1 \text{ and } Y = 1)\\
+                &= P(X=1) P(Y = 1|X = 1)\\
+                &= \frac{1}{3}
+            \end{split}
+        \end{equation}
+        
+        \item The values of $X$ and $Y$ uncorrelated when $p$ and $q$ are:
+
+        \begin{equation}
+            \begin{split}
+                Cov(X,Y) &= \frac{1}{3} - p \cdot q\\
+                &= \frac{1}{3} - \frac{1}{3}\\
+                &= 0
+            \end{split}
+        \end{equation}
+
+        where:
+        \begin{equation}
+            p \cdot q = \frac{1}{3}
+        \end{equation}\\
+
+        \item $X$ and $Y$ \textit{are} independent when $p \cdot q = 1/3$, as we have $P(X=1 \text{ and } Y=1) = P(X=1) P(Y=1)$, such that:
+        \begin{equation}
+        \begin{split}
+            P(X=1 \text{ and } Y=1) &= \frac{1}{3}\\
+            &= p \cdot q
+        \end{split}
+        \end{equation}
+    \end{enumerate}
+    
+%% end
+\end{enumerate}
+\end{document}
